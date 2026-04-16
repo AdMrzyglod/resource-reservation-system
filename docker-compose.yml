@@ -1,0 +1,100 @@
+services:
+  db:
+    image: postgres:17-alpine
+    restart: always
+    env_file: .env
+    ports:
+      - "5732:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  setup:
+    profiles: ["init"]
+    build: ./backend
+    env_file: .env
+    command: sh -c "python manage.py collectstatic --noinput && python manage.py migrate && python manage.py insert_data"
+    volumes:
+      - ./backend:/app
+      - static_volume:/app/static
+    depends_on:
+      db:
+        condition: service_healthy
+
+  backend:
+    build: ./backend
+    env_file: .env
+    command: sh -c "gunicorn config.asgi:application -k uvicorn.workers.UvicornWorker -w 4 -b 0.0.0.0:8000 2>&1 | tee -a /var/log/app/backend.log"
+    volumes:
+      - ./backend:/app
+      - applogs:/var/log/app
+      - static_volume:/app/static
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  celery_worker:
+    build: ./backend
+    env_file: .env
+    command: sh -c "celery -A config worker -l INFO --concurrency=4 2>&1 | tee -a /var/log/app/celery_worker.log"
+    volumes:
+      - ./backend:/app
+      - applogs:/var/log/app
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  celery_beat:
+    build: ./backend
+    env_file: .env
+    command: sh -c "celery -A config beat -l INFO --scheduler redbeat.RedBeatScheduler 2>&1 | tee -a /var/log/app/celery_beat.log"
+    volumes:
+      - ./backend:/app
+      - applogs:/var/log/app
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    env_file: .env
+    command: npm run dev -- --host 0.0.0.0
+    volumes:
+      - ./frontend:/app
+      - node_modules:/app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+  redisdata:
+  applogs:
+  static_volume:
+  node_modules:
