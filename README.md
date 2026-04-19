@@ -94,6 +94,8 @@ The application features a single, centralized dashboard that dynamically adjust
 
 ## Demo
 
+#### To view the videos, download them from the repository (assets folder)
+
 ### Home Page
 ![Home Page](assets/home_page.png)
 
