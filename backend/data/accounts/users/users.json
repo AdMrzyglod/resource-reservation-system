@@ -1,0 +1,68 @@
+[
+  {
+    "username": "username1",
+    "email": "username1@example.com",
+    "password": "123456",
+    "role": "USER",
+    "profile": {
+      "account_type": "individual",
+      "first_name": "Jan",
+      "last_name": "Kowalski",
+      "company_name": "",
+      "tax_id": "",
+      "address": {
+        "street": "Main 1",
+        "city": "Warsaw",
+        "postal_code": "11-111",
+        "country": "Poland"
+      },
+      "payout_account": {
+        "bank_account_number": "PL11111111111111111111111111"
+      }
+    }
+  },
+  {
+    "username": "username2",
+    "email": "username2@example.com",
+    "password": "123456",
+    "role": "USER",
+    "profile": {
+      "account_type": "company",
+      "first_name": "",
+      "last_name": "",
+      "company_name": "ACME Sp. z o.o.",
+      "tax_id": "PL1234567890",
+      "address": {
+        "street": "Business 111",
+        "city": "Warsaw",
+        "postal_code": "00-011",
+        "country": "Poland"
+      },
+      "payout_account": {
+        "bank_account_number": "PL33333333333333333333333333"
+      }
+    }
+  },
+  {
+    "username": "username3",
+    "email": "username3@example.com",
+    "password": "123456",
+    "role": "USER",
+    "profile": {
+      "account_type": "individual",
+      "first_name": "Anna",
+      "last_name": "Nowak",
+      "company_name": "",
+      "tax_id": "",
+      "address": {
+        "street": "New street",
+        "city": "Boston",
+        "postal_code": "22-222",
+        "country": "USA"
+      },
+      "payout_account": {
+        "bank_account_number": "PL23333322222222222222222222"
+      }
+    }
+  }
+]

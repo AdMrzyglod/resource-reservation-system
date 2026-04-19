@@ -91,3 +91,22 @@ The application features a single, centralized dashboard that dynamically adjust
 
 * **Buyer Tools:** Integrated features to browse available resources, an intuitive map-based seat selection process, and access to a comprehensive order history with ticket details.
 * **Creator Tools:** Advanced management features for creators to monitor live statistics (real-time revenue, units sold), view detailed order lists for each map, and track payout status for completed sales.
+
+## Demo
+
+### Home Page
+![Home Page](assets/home_page.png)
+
+---
+
+### App Presentation (3 parts)
+
+- ### Part 1 - [video link 1](assets/app_presentation_1.mp4)
+- ### Part 2 - [video link 2](assets/app_presentation_2.mp4)
+- ### Part 3 - [video link 3](assets/app_presentation_3.mp4)
+
+---
+
+### Real-time Reservation Demo
+
+- ### Real-time resource reservation - [video](assets/reservation_realtime.mp4)

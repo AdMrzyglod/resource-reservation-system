@@ -2,5 +2,7 @@
   {"name": "Sport"},
   {"name": "Cinema"},
   {"name": "Theater"},
-  {"name": "Flights"}
+  {"name": "Flights"},
+  {"name": "Trains"},
+  {"name": "Garages"}
 ]

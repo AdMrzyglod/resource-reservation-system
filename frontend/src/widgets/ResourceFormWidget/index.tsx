@@ -26,7 +26,7 @@ export const ResourceFormWidget = ({ id }: { id?: string }) => {
             alert("Error: The Event End Date must be strictly AFTER the Start Date.");
             return;
         }
-        a
+        
         if (deadlineMs && deadlineMs >= startMs) {
             alert("Error: The Purchase Deadline must be BEFORE the Event Start Date.");
             return;
